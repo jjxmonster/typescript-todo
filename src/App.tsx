@@ -34,21 +34,24 @@ const TodoReducer = (state: State, action: Actions) => {
 
 const App: React.FC = () => {
    const [todos, dispatch] = useReducer(TodoReducer, []);
-   const [currenTask, setCurrentTask] = useState<String>();
+   const [currentTask, setCurrentTask] = useState<string>('');
+   const [error, setErrorVisibility] = useState(false);
 
    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
       setCurrentTask(e.target.value);
    };
 
+   const handleButtonClick = () =>
+      currentTask.length > 5
+         ? dispatch({ type: 'add', task: currentTask })
+         : setErrorVisibility(true);
+
    return (
       <>
          <TasksList tasks={todos} />
          <Input handleChange={handleInputChange} />
-         {/* <Button
-         // onClick={() => {
-         //    // dispatch({ type: 'add', task: task });
-         // }}
-         /> */}
+         <p>{error ? 'too short task!' : null}</p>
+         <Button onClick={handleButtonClick} />
       </>
    );
 };
