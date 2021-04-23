@@ -15,15 +15,18 @@ const App: React.FC = () => {
       setCurrentTask(e.target.value);
    };
 
+   const handleAddTask = (): void => {
+      dispatch({ type: 'add', name: currentTask });
+      setCurrentTask('');
+   };
+
    const handleButtonClick = (): void =>
-      currentTask.length > 5
-         ? dispatch({ type: 'add', task: currentTask })
-         : setErrorVisibility(true);
+      currentTask.length > 5 ? handleAddTask() : setErrorVisibility(true);
 
    return (
       <>
          <TasksList tasks={todos} />
-         <Input handleChange={handleInputChange} />
+         <Input value={currentTask} handleChange={handleInputChange} />
          <p>{error ? 'too short task!' : null}</p>
          <Button onClick={handleButtonClick} />
       </>

@@ -1,7 +1,7 @@
 type Actions =
    | {
         type: 'add';
-        task: string;
+        name: string;
      }
    | {
         type: 'remove';
@@ -9,7 +9,7 @@ type Actions =
      };
 
 interface Todo {
-   task: string;
+   name: string;
    complete: boolean;
 }
 
@@ -18,7 +18,7 @@ type State = Array<Todo>;
 export const TodoReducer = (state: State, action: Actions) => {
    switch (action.type) {
       case 'add':
-         return [...state, { task: action.task, complete: false }];
+         return [...state, { name: action.name, complete: false }];
       case 'remove':
          return state.filter((task, id) => id !== action.id);
       default:

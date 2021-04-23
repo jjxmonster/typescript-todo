@@ -5,7 +5,7 @@ export interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = props => {
-   return <button onClick={props.onClick}>DODAJ</button>;
+   return <button onClick={props.onClick}>ADD</button>;
 };
 
 export default Button;
